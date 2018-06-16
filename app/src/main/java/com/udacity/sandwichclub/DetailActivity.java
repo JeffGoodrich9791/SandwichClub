@@ -3,6 +3,7 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,11 +20,11 @@ public class DetailActivity extends AppCompatActivity {
 
     private Sandwich sandwich;
 
-    ImageView ingredientsIv = findViewById(R.id.image_iv);
-    TextView knownAs = findViewById(R.id.also_known_tv);
-    TextView originTv = findViewById(R.id.origin_tv);
-    TextView descriptionTv = findViewById(R.id.description_tv);
-    TextView ingredientsTv = findViewById(R.id.ingredients_tv);
+    ImageView ingredientsIv;
+    TextView knownAs;
+    TextView originTv;
+    TextView descriptionTv;
+    TextView indgredientsTv;
 
 
 
@@ -32,7 +33,11 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        ImageView ingredientsIv = findViewById(R.id.image_iv);
+        ingredientsIv = findViewById(R.id.image_iv);
+        knownAs = findViewById(R.id.also_known_tv);
+        originTv = findViewById(R.id.origin_tv);
+        descriptionTv = findViewById(R.id.description_tv);
+        indgredientsTv = findViewById(R.id.ingredients_tv);
 
         Intent intent = getIntent();
         if (intent == null) {
@@ -71,17 +76,16 @@ public class DetailActivity extends AppCompatActivity {
 
     private void populateUI() {
 
-        if (sandwich.getPlaceOfOrigin().isEmpty()){
+        if (sandwich.getPlaceOfOrigin() != null){
             originTv.setText(R.string.no_data);
         }else {
             originTv.setText(sandwich.getPlaceOfOrigin());
         }
-        if (sandwich.getAlsoKnownAs().isEmpty()){
+        if (sandwich.getAlsoKnownAs() != null){
             knownAs.setText(R.string.no_data);
         }else {
             knownAs.setText(listModel(sandwich.getAlsoKnownAs()));
         }
-
 
 
         descriptionTv.setText(sandwich.getDescription());
@@ -97,3 +101,4 @@ public class DetailActivity extends AppCompatActivity {
         return stringBuilder;
     }
 }
+
