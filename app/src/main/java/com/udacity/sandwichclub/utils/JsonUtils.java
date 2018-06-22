@@ -13,70 +13,57 @@ import java.util.List;
 
 public class JsonUtils {
 
+    /**
 
-    private static final String LOG_TAG = JsonUtils.class.getSimpleName();
-    private static final String SAND_NAME = "name";
-    private static final String SAND_MAIN_NAME= "mainName";
-    private static final String SAND_ALSO= "alsoKnownAs";
-    private static final String SAND_PLACE_ORIGIN= "placeOfOrigin";
-    private static final String SAND_DESCRIPTION= "description";
-    private static final String SAND_IMAGE= "image";
-    private static final String SAND_INGREDIENTS= "ingredients";
-
-
+     *
+     * @param json the JSON string to be parsed.
+     * @return the JSON string in a Sandwich object or null if parsing the specified JSON string fails.
+     */
     public static Sandwich parseSandwichJson(String json) {
+        try
+        {
+            JSONObject jsonObject = new JSONObject(json);
 
-        JSONObject jsonObject;
+            JSONObject nameObject = jsonObject.getJSONObject("name");
 
-        String mainName = null;
-        String placeOfOrigin = null;
-        String description = null;
-        String image = null;
+            String mainName = nameObject.getString("mainName");
 
-        List<String> ingredients = new ArrayList<>();
-        List<String> alsoKnownAs = new ArrayList<>();
+            List<String> alsoKnownAs = JsonUtils.fromJsonArrayToList(nameObject, "alsoKnownAs");
 
-        try {
+            String placeOfOrigin = jsonObject.getString("placeOfOrigin");
 
-            jsonObject = new JSONObject(json);
-            JSONObject jsonObjectName = jsonObject.getJSONObject(SAND_NAME);
-            mainName = jsonObjectName.optString(SAND_MAIN_NAME);
-            placeOfOrigin = jsonObjectName.optString(SAND_PLACE_ORIGIN);
-            description = jsonObjectName.optString(SAND_DESCRIPTION);
-            image = jsonObject.optString(SAND_IMAGE);
+            String description = jsonObject.getString("description");
 
-            alsoKnownAs = jsonArrayList(jsonObjectName.getJSONArray(SAND_ALSO));
-            ingredients = jsonArrayList(jsonObjectName.getJSONArray(SAND_INGREDIENTS));
+            String image = jsonObject.getString("image");
 
+            List<String> ingredients = JsonUtils.fromJsonArrayToList(jsonObject, "ingredients");
 
-        }catch (JSONException e) {
-            Log.e(LOG_TAG, "Problems with Parse", e);
-
+            return new Sandwich(mainName, alsoKnownAs, placeOfOrigin, description, image, ingredients);
         }
-
-        return new Sandwich(mainName, alsoKnownAs, placeOfOrigin, description, image, ingredients);
-
+        catch (JSONException e)
+        {
+            // Failed to parse the JSON string
+            return null;
+        }
     }
 
-    private static List<String>jsonArrayList(JSONArray jsonArray) {
-
-        List<String>list = new ArrayList<>(0);
-
-        if (jsonArray != null){
-
-            for (int i=0; i < jsonArray.length(); i++){
-
-                try {
-                    list.add(jsonArray.getString(i));
-
-                }catch (JSONException e) {
-
-                    Log.e(LOG_TAG, "Problems with Array", e);
-                }
-            }
-
+    /**
+     * A Helper function that converts the JSON array specified by the JSON array into a List.
+     *
+     * @param jsonObject the JSON object containing the JSON array to be converted.
+     * @param jsonArrayName the name of the JSON array in the specified JSONObject.
+     * @return the JSON array specified by the JSON array name as a List.
+     * @throws JSONException if there is a parse error.
+     */
+    private static List<String> fromJsonArrayToList(JSONObject jsonObject, String jsonArrayName) throws JSONException
+    {
+        List<String> list = new ArrayList<String>();
+        JSONArray jsonArray = jsonObject.getJSONArray(jsonArrayName);
+        for(int i = 0; i < jsonArray.length(); ++i)
+        {
+            list.add(jsonArray.getString(i));
         }
+
         return list;
     }
-
 }
