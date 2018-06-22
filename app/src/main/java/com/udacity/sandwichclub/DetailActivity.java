@@ -3,6 +3,9 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import android.text.TextUtils;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,6 +15,8 @@ import java.util.List;
 import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
+
+import org.json.JSONException;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -56,12 +61,11 @@ public class DetailActivity extends AppCompatActivity {
         Sandwich sandwich = JsonUtils.parseSandwichJson(json);
 
         if (sandwich == null) {
-            // Sandwich data unavailable
             closeOnError();
             return;
         }
 
-        populateUI();
+        populateUI(sandwich);
         Picasso.with(this)
                 .load(sandwich.getImage())
                 .into(ingredientsIv);
@@ -74,22 +78,34 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
-    private void populateUI() {
+    private void populateUI(Sandwich sandwich) {
 
         if (sandwich.getPlaceOfOrigin() != null){
-            originTv.setText(R.string.no_data);
+
+            originTv.setText(R.string.detail_error_message);
+        }else {
+            originTv.setText(sandwich.getPlaceOfOrigin());
+        }
+
+        if(sandwich.getAlsoKnownAs() == null){
+            knownAs.setText(R.string.detail_error_message);
+
+            originTv.setText(R.string.detail_error_message);
         }else {
             originTv.setText(sandwich.getPlaceOfOrigin());
         }
         if (sandwich.getAlsoKnownAs() != null){
-            knownAs.setText(R.string.no_data);
+            knownAs.setText(R.string.detail_error_message);
+
         }else {
-            knownAs.setText(listModel(sandwich.getAlsoKnownAs()));
+            knownAs.setText(TextUtils.join(", ", sandwich.getAlsoKnownAs()));
         }
 
 
         descriptionTv.setText(sandwich.getDescription());
-        descriptionTv.setText(listModel(sandwich.getIngredients()));
+        indgredientsTv.setText(listModel(sandwich.getIngredients()));
+        originTv.setText(sandwich.getPlaceOfOrigin());
+
 
     }
 
@@ -101,4 +117,3 @@ public class DetailActivity extends AppCompatActivity {
         return stringBuilder;
     }
 }
-
