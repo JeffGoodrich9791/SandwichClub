@@ -12,7 +12,6 @@
 
     <!-- Error messages-->
     <string name="detail_error_message">Sandwich data not available</string>
-    <string name="no_data">No Data</string>
 
     <string-array name="sandwich_names">
         <item>Ham and cheese sandwich</item>
@@ -128,5 +127,3 @@
             mashed potato patty\",\"chilli peppers\",\"garlic\",\"ginger\",\"bread bun\"]}
         </item>
     </string-array>
-
-</resources>
