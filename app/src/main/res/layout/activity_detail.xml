@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,15 +9,13 @@
     
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
 
      <LinearLayout
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:orientation="vertical"
-         android:paddingBottom="10dp">
-
+         android:orientation="vertical">
 
 
         <ImageView
@@ -25,52 +25,89 @@
             android:adjustViewBounds="true"
             android:contentDescription="@string/sandwich_picture_content_description"
             android:scaleType="centerCrop" />
+         
+         <LinearLayout
+             style="@style/Base.TextAppearance.AppCompat.Display1"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/origin_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+             <TextView
+                 android:id="@+id/detail_place_of_origin_label"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/detail_place_of_origin_label"
+                 android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/detal_also_known_as_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/detail_also_known_as_label"
-            android:textStyle="bold" />
+             <TextView
+                 android:id="@+id/origin_tv"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/detail_ingredients_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/detail_ingredients_label" />
 
-        <TextView
-            android:id="@+id/detail_place_of_origin_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/detail_place_of_origin_label"
-            android:textStyle="bold" />
+         </LinearLayout>
 
-        <TextView
-            android:id="@+id/description_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+         <LinearLayout
 
-        <TextView
-            android:id="@+id/ingredients_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/also_known_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+             <TextView
+                 android:id="@+id/description_label"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/detail_description_label"
+                 android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/description_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/detail_description_label" />
+             <TextView
+                 android:id="@+id/description_tv"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />
+
+
+         </LinearLayout>
+
+         <LinearLayout
+
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
+
+             <TextView
+
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/detail_also_known_as_label"
+                 android:textStyle="bold" />
+
+             <TextView
+                 android:id="@+id/also_known_tv"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"/>
+
+
+
+         </LinearLayout>
+
+         <LinearLayout
+             style="@style/Base.TextAppearance.AppCompat.Display1"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
+
+             <TextView
+                 android:id="@+id/detail_ingredients_label"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/detail_ingredients_label"
+                 android:textStyle="bold"/>
+
+             <TextView
+                 android:id="@+id/ingredients_tv"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />
+
+
+
+         </LinearLayout>
+
 
      </LinearLayout>
 
