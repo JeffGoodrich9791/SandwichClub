@@ -1,12 +1,8 @@
 package com.udacity.sandwichclub.utils;
-
 import android.util.Log;
-
 import com.udacity.sandwichclub.model.Sandwich;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import org.json.JSONException;
 import java.util.List;
@@ -42,14 +38,13 @@ public class JsonUtils {
         }
         catch (JSONException e)
         {
-            // Failed to parse the JSON string
+            // Could not parse JSON String
             return null;
         }
     }
 
     /**
-     * A Helper function that converts the JSON array specified by the JSON array into a List.
-     *
+     
      * @param jsonObject the JSON object containing the JSON array to be converted.
      * @param jsonArrayName the name of the JSON array in the specified JSONObject.
      * @return the JSON array specified by the JSON array name as a List.
